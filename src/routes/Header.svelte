@@ -1,12 +1,11 @@
 <script>
 	import { page } from '$app/stores';
-	import logo from '$lib/images/svelte-logo.svg';
 	import github from '$lib/images/github.svg';
 </script>
 
 <header>
 	<div class="corner">
-		<a href="https://github.com/sveltejs/kit">
+		<a href="https://github.com/SpicyRicecaker/latex-webwork-converter">
 			<img src={github} alt="GitHub" />
 		</a>
 	</div>
@@ -35,6 +34,7 @@
 		width: 2em;
 		height: 2em;
 		object-fit: contain;
+		filter: invert(100%);
 	}
 
 	nav {

@@ -1,16 +1,57 @@
 <script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+	let latex = '';
+	let webwork = '';
+
+	const rules = [
+		[String.raw`\left`, ''],
+		[String.raw`\right`, ''],
+		[String.raw`_`, ''],
+		// multiply
+		[String.raw`\cdot`, '*'],
+		// division
+		[String.raw`\frac{`, '('],
+		[String.raw`}{`, ')/('],
+		// special functions
+		[String.raw`\sqrt`, 'sqrt'],
+		[String.raw`\sin`, 'sin'],
+		[String.raw`\cos`, 'cos'],
+		[String.raw`\ln`, 'ln'],
+		// cleanup all remaining curly brackets
+		// make sure this is at the end
+		[String.raw`{`, '('],
+		[String.raw`}`, ')']
+	];
+
+	$: {
+		let temp = latex;
+		for (let i = 0; i < rules.length; i++) {
+			temp = temp.replace(rules[i][0], rules[i][1]);
+		}
+		webwork = temp;
+	}
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<title>Webwork Converter</title>
+	<meta name="description" content="Latex to Webwork Converter!" />
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+	</style>
 </svelte:head>
 
 <section>
-	hello world
+	<h1>
+		<div style="color: #a9b665">Desmos</div>
+		<div style="opacity: 50%">to</div>
+		<div><span style="color: #7daea3">Webwork </span>Converter</div>
+	</h1>
+	<label>
+		<input class="roboto-mono-input" placeholder="paste from desmos here..." bind:value={latex} />
+	</label>
+	<div style="align-self: center">▼</div>
+	<label>
+		<input class="roboto-mono-input" readonly bind:value={webwork} />
+	</label>
 </section>
 
 <style>
@@ -18,8 +59,49 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		align-items: center;
+		align-items: left;
+		align-self: center;
+		gap: 1rem;
 		flex: 0.6;
+	}
+
+	h1 {
+		font-size: 2rem;
+		margin: 0;
+		text-align: left;
+	}
+
+	.roboto-mono-input {
+		font-family: 'Roboto Mono', monospace;
+		font-optical-sizing: auto;
+		font-weight: 400;
+		font-style: normal;
+	}
+
+	input {
+		padding: 0.6rem;
+		margin: 0;
+		width: 60vw;
+
+		background-color: #504945;
+		outline: none;
+		border-radius: 4px;
+		color: var(--color-text);
+
+		border: 2px solid var(--color-bg-1);
+	}
+	input:focus {
+		border: 2px solid var(--color-text);
+	}
+
+	::selection {
+		background: #d8a657;
+		color: #141617;
+	}
+
+	::placeholder {
+		color: var(--color-text);
+		opacity: 50%;
 	}
 
 	h1 {
