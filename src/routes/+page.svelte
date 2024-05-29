@@ -50,6 +50,9 @@
 	<label>
 		<input class="roboto-mono-input" readonly bind:value={webwork} />
 	</label>
+	<div style="align-self: center; width: 60vw; opacity: 70%;">
+		*Please put a parenthesis around arguments for sin and cos in Desmos, as sin2x will be evaluated by Webwork as sin(2)*x
+	</div>
 </section>
 
 <style>
