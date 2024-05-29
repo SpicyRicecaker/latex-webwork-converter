@@ -3,19 +3,15 @@
 	let webwork = '';
 
 	const rules = [
-		[String.raw`\left`, ''],
-		[String.raw`\right`, ''],
+		[String.raw`left`, ''],
+		[String.raw`right`, ''],
 		[String.raw`_`, ''],
+		['\\', ''],
 		// multiply
-		[String.raw`\cdot`, '*'],
+		[String.raw`cdot`, '*'],
 		// division
-		[String.raw`\frac{`, '('],
+		[String.raw`frac{`, '('],
 		[String.raw`}{`, ')/('],
-		// special functions
-		[String.raw`\sqrt`, 'sqrt'],
-		[String.raw`\sin`, 'sin'],
-		[String.raw`\cos`, 'cos'],
-		[String.raw`\ln`, 'ln'],
 		// cleanup all remaining curly brackets
 		// make sure this is at the end
 		[String.raw`{`, '('],
@@ -25,7 +21,7 @@
 	$: {
 		let temp = latex;
 		for (let i = 0; i < rules.length; i++) {
-			temp = temp.replace(rules[i][0], rules[i][1]);
+			temp = temp.replaceAll(rules[i][0], rules[i][1]);
 		}
 		webwork = temp;
 	}
