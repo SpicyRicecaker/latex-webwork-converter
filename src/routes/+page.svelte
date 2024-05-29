@@ -3,6 +3,8 @@
 	let webwork = '';
 
 	const rules = [
+		[`c_{1}`, 'c1'],
+		[`c_{2}`, 'c1'],
 		[String.raw`left`, ''],
 		[String.raw`right`, ''],
 		[String.raw`_`, ''],
